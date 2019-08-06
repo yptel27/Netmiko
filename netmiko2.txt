@@ -1,0 +1,71 @@
+##############################################################################
+#
+# Name:   netmiko2
+# Author: Yagnesh Patel
+# Date:   8/1/19
+# Version: 1.0
+#
+# Description: This script configure given command on the router and commit the configuration.
+#
+#    Copyright 2019 Juniper Networks, Inc. All rights reserved.
+#    Licensed under the Juniper Networks Script Software License (the "License").
+#    You may not use this script file except in compliance with the License,
+#    which is located at
+#    http://www.juniper.net/support/legal/scriptlicense/
+#    Unless required by applicable law or otherwise agreed to in writing by the
+#    parties, software distributed under the License is distributed on an "AS IS"
+#    BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+#    implied.
+##############################################################################
+
+from netmiko import ConnectHandler  
+from datetime import datetime  
+
+#Device details
+devices = {
+    'device_type': 'juniper',
+    'ip':   '10.85.174.205',
+    'username': 'xxxxx',
+    'password': 'xxxxx',
+    }    
+
+#List containing all device info
+device_list=[devices]
+
+#Start time of the program
+start_time = datetime.now()
+
+
+#Connect to the device using Device details
+for device in device_list:
+    net_connect = ConnectHandler(**device)
+    
+
+    #Enter configuration Mode - JunOS only
+    net_connect.config_mode()
+    
+    #Add commands
+    description = net_connect.send_command("set interfaces ge-0/0/0 description NetMIKO-TEST-1") #Add description to interface
+    
+    #Commit commands
+    commit = net_connect.commit()
+    
+    #Compare Configuration and Print changes
+    compare= (net_connect.send_command("show | compare rollback 1"))
+    if str(compare)== "\n":
+        print ("No Changes\n")
+    else:
+        print (compare)
+    
+    
+    
+    #Exit Configuration mode
+    net_connect.exit_config_mode()
+    
+    #End SSH session
+    net_connect.disconnect()
+
+#Calculate Total program time
+end_time = datetime.now()
+total_time = end_time - start_time 
+print (total_time)

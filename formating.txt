@@ -1,0 +1,7 @@
+input_file = "C:/Users/ypatel/Desktop/Python-Script/pyez-8.txt"  # e.g. source.py
+output_file = "C:/Users/ypatel/Desktop/Python-Script/pyez-8-.txt"  # e.g out.py
+with open(input_file, 'r',encoding="utf8") as source:
+    with open(output_file, 'a+',encoding="utf8") as result:
+        for line in source:
+            line = line.replace('\t', '    ')
+            result.write(line)

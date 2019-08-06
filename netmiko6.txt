@@ -1,0 +1,96 @@
+##############################################################################
+#
+# Name:   netmiko6
+# Author: Yagnesh Patel
+# Date:   8/1/19
+# Version: 1.0
+#
+# Description: This script take two text files- command_list.txt and host.txt as input. The host.txt supplies management ip of the routers and command_list.txt supplies the list of command to be collected.
+#              The script asks username and password for the router login. 
+#              The output of the script collected is stored in seperate file.
+#              Script upload the collected data to Juniper SFTP server. 
+#
+# Possible improvement with the script: using router name instead of IP, asking user to provide a name of router instead of host file. 
+#
+#
+#    Copyright 2019 Juniper Networks, Inc. All rights reserved.
+#    Licensed under the Juniper Networks Script Software License (the "License").
+#    You may not use this script file except in compliance with the License,
+#    which is located at
+#    http://www.juniper.net/support/legal/scriptlicense/
+#    Unless required by applicable law or otherwise agreed to in writing by the
+#    parties, software distributed under the License is distributed on an "AS IS"
+#    BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+#    implied.
+##############################################################################
+
+
+
+from netmiko import ConnectHandler
+import time, sys, getpass
+from datetime import datetime  
+from jnpr.junos import Device
+import pysftp
+from base64 import decodebytes
+import paramiko
+import logging
+
+#Start time of the program
+start_time = datetime.now()
+
+device = {
+    'device_type': 'juniper',
+    }    
+
+ 
+print ("Please update command_list.txt and host.txt with list of commands and name of the routers respectively") 
+device['username']=input("Enter your SSH username:  ") 
+device['password']=getpass.getpass() 
+
+with open('command_list.txt') as temp_file:
+  command_list = [line.rstrip('\n') for line in temp_file]
+
+#with open('host.txt') as temp1_file:
+#  device_list = [line.rstrip('\n') for line in temp1_file]
+  
+device_list=open("host.txt")
+
+for line in device_list:
+    device['ip']=line.strip("\n")
+    net_connect = ConnectHandler(**device)
+    filename = device['ip']
+    handle = open (filename,'w+')
+    for command in command_list:
+    
+        # Enter operational mode commands
+        command_output = net_connect.send_command(command)   
+        print (command_output)
+       
+        # store output of command in file
+        handle.write(device['ip'])
+        handle.write(command)
+        handle.write(command_output)
+        
+    
+    handle.close()
+    print("Completed data collection for {}".format(device['ip']))
+    #End SSH session
+    net_connect.disconnect()
+    FTP_PREF =input("Do you want to upload files to Juniper FTP server? Enter 'Yes' or 'No': ") 
+
+    if FTP_PREF == 'Yes':
+        #known_hosts = "sftp.juniper.net ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAxhUlkqO96XBR50cNbb8cOOC+w57jW3/ZmJWdQ+CH/NZmLpoVtC3Wf9pd/gvfJc+JDgeu+x3Q+jVza58oVxqbojvK79jGBUr6pnlQXsWD6uk+TAbaKuP80tYx4fTsQZ5H/EyefSc9A1epj7bC8VSa9sUwrvuxDB3Cp2AC73zRIlbOyxb5xZ8zKHbn1IDartjUGthOF7bVccxMuUR45oZHITE4c/ABFnLHoForA1kQukaqE69pVtWHujQcx6fFnsrtWCYTLqPDl/dixHYTz8IwVnEQtjegdLwnbWq1RQ7sjVX/+A8cezQpTy42SSO52VQFfSuHryiNHeC/AVf21BJOEw=="
+        cnopts = pysftp.CnOpts()
+        cnopts.hostkeys = None
+        #cnopts.hostkeys.load('known_hosts')
+        local_path = filename
+        remote_path = '/pub/incoming/2012-0321-0722/filename.txt'
+        with pysftp.Connection(host="sftp.juniper.net", username="anonymous",password="anonymous", cnopts=cnopts) as sftp:
+            sftp.put(local_path, remote_path)
+
+#Calculate Total program time
+end_time = datetime.now()
+total_time = end_time - start_time 
+print("Script completed the collection in {}".format(total_time))
+
+

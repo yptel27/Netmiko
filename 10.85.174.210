@@ -1,0 +1,146 @@
+10.85.174.210show chassis hardware
+Hardware inventory:
+Item             Version  Part number  Serial number     Description
+Chassis                                JN117CC48AFB      MX480
+Midplane         REV 05   710-017414   ABAA9603          MX480 Midplane
+FPM Board        REV 02   710-017254   ABBE9125          Front Panel Display
+PEM 0            Rev 10   740-029970   QCS1407U0VT       PS 1.4-2.52kW; 90-264V AC in
+PEM 1            Rev 07   740-029970   QCS1124U0JA       PS 1.4-2.52kW; 90-264V AC in
+Routing Engine 0 REV 03   740-051822   9016006334        RE-S-1800x4
+Routing Engine 1 REV 09   740-031116   9009172042        RE-S-1800x4
+CB 0             REV 20   750-031391   ABCN5928          Enhanced MX SCB
+CB 1             REV 20   750-031391   ABCV6698          Enhanced MX SCB
+FPC 0            REV 25   750-022366   CAAB8683          DPCE 20x 1GE + 2x 10GE R EQ
+  CPU            REV 05   710-022351   ZN7326            DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+  PIC 1                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+  PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+  PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+FPC 1            REV 38   750-028467   ABCR9241          MPC 3D 16x 10GE
+  CPU            REV 12   711-029089   ABCL6935          AMPC PMB
+  PIC 0                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031980   AQ401TD           SFP+-10G-SR
+    Xcvr 2       REV 01   740-021308   ANM1BWP           SFP+-10G-SR
+  PIC 1                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031980   AQ31GS9           SFP+-10G-SR
+    Xcvr 1       REV 01   740-021308   ANM19GR           SFP+-10G-SR
+  PIC 2                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031980   AQ400QE           SFP+-10G-SR
+  PIC 3                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031980   AQ400JK           SFP+-10G-SR
+    Xcvr 3       REV 01   740-031980   AS92SUU           SFP+-10G-SR
+FPC 2            REV 25   750-021566   CABV8547          DPCE 4x 10GE R
+  CPU            REV 05   710-022351   CABV8912          DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+    Xcvr 0                NON-JNPR     CC14BK071         XFP-10G-SR
+  PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+  PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+  PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+FPC 3            REV 12   750-022366   XD5397            DPCE 20x 1GE + 2x 10GE R EQ
+  CPU            REV 03   710-022351   XE5785            DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+  PIC 1                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+  PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+  PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+FPC 4            REV 28   750-021679   CABA6164          DPCE 40x 1GE R
+  CPU            REV 05   710-022351   CAAX2919          DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 1       0        NON-JNPR     AM060308TE        SFP-SX
+    Xcvr 2       0        NON-JNPR     0412220152505304  SFP-SX
+    Xcvr 3                NON-JNPR     AM0821SA9A0       SFP-SX
+    Xcvr 4       0        NON-JNPR     0402030318475481  SFP-SX
+    Xcvr 5       0        NON-JNPR     0501031054384193  SFP-SX
+  PIC 1                   BUILTIN      BUILTIN           10x 1GE(LAN)
+  PIC 2                   BUILTIN      BUILTIN           10x 1GE(LAN)
+  PIC 3                   BUILTIN      BUILTIN           10x 1GE(LAN)
+FPC 5            REV 22   750-021566   CAAL5881          DPCE 4x 10GE R
+  CPU            REV 05   710-022351   CAAM9348          DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+    Xcvr 0       REV 03   740-014289   CC31BQ037         XFP-10G-SR
+  PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+  PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+  PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+Fan Tray                                                 Enhanced Left Fan Tray
+
+{master}10.85.174.210show version
+Hostname: getafix-re0
+Model: mx480
+Junos: 15.1F2-S19
+JUNOS OS Kernel 64-bit  [20170721.352271_builder_stable_10]
+JUNOS OS libs [20170721.352271_builder_stable_10]
+JUNOS OS runtime [20170721.352271_builder_stable_10]
+JUNOS OS time zone information [20170721.352271_builder_stable_10]
+JUNOS OS libs compat32 [20170721.352271_builder_stable_10]
+JUNOS OS 32-bit compatibility [20170721.352271_builder_stable_10]
+JUNOS py base [20170818.134756_builder_junos_151_f2_s19]
+JUNOS OS crypto [20170721.352271_builder_stable_10]
+JUNOS network stack and utilities [20170818.134756_builder_junos_151_f2_s19]
+JUNOS libs compat32 [20170818.134756_builder_junos_151_f2_s19]
+JUNOS runtime [20170818.134756_builder_junos_151_f2_s19]
+JUNOS platform support [20170818.134756_builder_junos_151_f2_s19]
+JUNOS modules [20170818.134756_builder_junos_151_f2_s19]
+JUNOS libs [20170818.134756_builder_junos_151_f2_s19]
+JUNOS daemons [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Voice Services Container package [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services SSL [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services Stateful Firewall [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services RPM [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services PTSP Container package [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services NAT [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services Mobile Subscriber Service Container package [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services MobileNext Software package [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services LL-PDF Container package [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services Jflow Container package [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services IPSec [20170818.134756_builder_junos_151_f2_s19]
+JUNOS IDP Services [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services HTTP Content Management package [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services Crypto [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services Captive Portal and Content Delivery Container package [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Border Gateway Function package [20170818.134756_builder_junos_151_f2_s19]
+JUNOS AppId Services [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services Application Level Gateways [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Services AACL Container package [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Packet Forwarding Engine Support (MX/EX92XX Common) [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Packet Forwarding Engine Support (M/T Common) [20170818.134756_builder_junos_151_f2_s19]
+JUNOS Online Documentation [20170818.134756_builder_junos_151_f2_s19]
+JUNOS FIPS mode utilities [20170818.134756_builder_junos_151_f2_s19]
+
+{master}10.85.174.210show lldp neighbors
+Local Interface    Parent Interface    Chassis Id          Port info          System Name
+xe-1/0/2           ae11                00:22:83:09:2f:c0   967                idefix-re0.jtac-east.jnpr.net
+xe-1/1/1           ae11                00:22:83:09:2f:c0   976                idefix-re0.jtac-east.jnpr.net
+xe-1/0/0           ae22                3c:61:04:00:7a:c0   2186               ashburn-re0         
+xe-1/1/0           ae22                3c:61:04:00:7a:c0   2194               ashburn-re0         
+xe-1/2/0           ae23                3c:61:04:47:a7:c0   xe-0/0/1           beltway-re0         
+xe-1/3/0           ae23                3c:61:04:47:a7:c0   xe-0/2/1           beltway-re0         
+xe-1/3/3           -                   84:c1:c1:99:f3:80   xe-0/0/81          hermes              
+
+{master}10.85.174.210request pfe execute target fpc0 command "show route summary"
+SENT: Ukern command: show route summary
+GOT:
+GOT:
+GOT: IPv4 Route Tables:
+GOT: Index         Routes     Size(b)
+GOT: --------  ----------  ----------
+GOT: Default         1124      148364
+GOT: 1                 42        5540
+GOT: 2                 13        1712
+GOT: 3                  9        1184
+GOT: 4                  5         656
+GOT: 1506               5         656
+GOT:
+GOT: MPLS Route Tables:
+GOT: Index         Routes     Size(b)
+GOT: --------  ----------  ----------
+GOT: Default         3578      472292
+GOT: 1507               1         128
+GOT:
+GOT: IPv6 Route Tables:
+GOT: Index         Routes     Size(b)
+GOT: --------  ----------  ----------
+GOT: Default            4         548
+GOT: 1                  7         980
+GOT: 1506               4         548
+LOCAL: End of file
+
+{master}

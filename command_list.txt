@@ -1,0 +1,5 @@
+'cprod -A fpc{} -c "show route summary"'
+'cprod -A fpc{} -c "show pfe statistics traffic"'
+'cprod -A fpc{} -c "show nhdb summary"'
+'cprod -A fpc{} -c "show nvram"'
+'cprod -A fpc{} -c "show syslog messages"'

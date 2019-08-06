@@ -1,0 +1,71 @@
+##############################################################################
+#
+# Name:   netmiko4
+# Author: Yagnesh Patel
+# Date:   8/1/19
+# Version: 1.0
+#
+# Description: This script work to collect show commands output. The commands are supplied from a outside text file. 
+#              Further script print command name while writing in the file.
+#              Besides show commands, there is also pfe command capture.
+#
+#    Copyright 2019 Juniper Networks, Inc. All rights reserved.
+#    Licensed under the Juniper Networks Script Software License (the "License").
+#    You may not use this script file except in compliance with the License,
+#    which is located at
+#    http://www.juniper.net/support/legal/scriptlicense/
+#    Unless required by applicable law or otherwise agreed to in writing by the
+#    parties, software distributed under the License is distributed on an "AS IS"
+#    BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+#    implied.
+##############################################################################
+
+
+
+from netmiko import ConnectHandler  
+from datetime import datetime  
+
+#Device details
+devices = {
+    'device_type': 'juniper',
+    'ip':   '10.85.174.205',
+    'username': 'xxxxx',
+    'password': 'xxxxx',
+    }    
+
+#List containing all device info
+device_list=[devices]
+
+#List containing all commands to be captured
+with open('command_list.txt') as temp_file:
+  command_list = [line.rstrip('\n') for line in temp_file]
+
+
+#Start time of the program
+start_time = datetime.now()
+
+#Connect to the device using Device details
+for device in device_list:
+    net_connect = ConnectHandler(**device)
+    filename = "output.txt"
+    handle = open (filename,'w+')
+    for command in command_list:
+    
+        # Enter operational mode commands
+        command_output = net_connect.send_command(command)   #Show interfaces that are up
+        print(command)
+        print (command_output)
+       
+        # store output of command in file
+        handle.write(command)
+        handle.write(command_output)
+      
+    
+    handle.close()
+    #End SSH session
+    net_connect.disconnect()
+
+#Calculate Total program time
+end_time = datetime.now()
+total_time = end_time - start_time 
+print (total_time)

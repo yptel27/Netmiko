@@ -1,0 +1,82 @@
+##############################################################################
+#
+# Name:   netmiko5
+# Author: Yagnesh Patel
+# Date:   8/1/19
+# Version: 1.0
+#
+# Description: This script take two text files- command_list.txt and host.txt as input. The host.txt supplies management ip of the routers and command_list.txt supplies the list of command to be collected.
+#              The script asks username and password for the router login. 
+#              The output of the script collected is stored in seperate file.
+#
+# Possible improvement with the script: using router name instead of IP, uploading data directly to FTP, asking user 
+#              to provide a name of router instead of host file, multi-processing so that script collect output on multiple routers simulteneously, exception handling so that script logs the error of connecting with device and move on with next one. 
+#
+#    Copyright 2019 Juniper Networks, Inc. All rights reserved.
+#    Licensed under the Juniper Networks Script Software License (the "License").
+#    You may not use this script file except in compliance with the License,
+#    which is located at
+#    http://www.juniper.net/support/legal/scriptlicense/
+#    Unless required by applicable law or otherwise agreed to in writing by the
+#    parties, software distributed under the License is distributed on an "AS IS"
+#    BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+#    implied.
+##############################################################################
+
+
+
+#This script take two text files- command_list.txt and host.txt as input. The host.txt supplies management ip of the routers and command_list.txt supplies the list of command to be collected.
+#The script asks username and password for the router login. 
+#The output of the script collected is stored in seperate file.
+#Possible improvement with the script: using router name instead of IP, uploading data directly to FTP, asking user to provide a name of router instead of host file, multi-processing so that script collect output on multiple routers simulteneously, exception handling so that script logs the error of connecting with device and move on with next one. 
+
+
+from netmiko import ConnectHandler
+import time, sys, getpass
+from datetime import datetime  
+
+#Start time of the program
+start_time = datetime.now()
+
+device = {
+    'device_type': 'juniper',
+    }    
+
+ 
+print ("Please update command_list.txt and host.txt with list of commands and name of the routers respectively") 
+device['username']=input("Enter your SSH username:  ") 
+device['password']=getpass.getpass() 
+
+with open('command_list.txt') as temp_file:
+  command_list = [line.rstrip('\n') for line in temp_file]
+
+
+device_list=open("host.txt")
+
+for line in device_list:
+    device['ip']=line.strip("\n")
+    print("Started data collection for {}".format(device['ip']))
+    net_connect = ConnectHandler(**device)
+    filename = device['ip']
+    handle = open (filename,'w+')
+    for command in command_list:
+    
+        # Enter operational mode commands
+        command_output = net_connect.send_command(command)   
+        print (command_output)
+       
+        # store output of command in file
+        handle.write(device['ip'])
+        handle.write(command)
+        handle.write(command_output)
+        
+    
+    handle.close()
+    print("Completed data collection for {}".format(device['ip']))
+    #End SSH session
+    net_connect.disconnect()
+
+#Calculate Total program time
+end_time = datetime.now()
+total_time = end_time - start_time 
+print("Script completed the collection in {}".format(total_time))
